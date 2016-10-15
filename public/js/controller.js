@@ -1,29 +1,48 @@
 (function () {
     angular.module("App")
-        .controller("ListCtrl", ListCtrl)
+        .controller("CategoryCtrl", CategoryCtrl)
+        .controller("BusinessCtrl", BusinessCtrl)
         .controller("DashboardCtrl", DashboardCtrl)
         .controller("UserChatCtrl", UserChatCtrl);
 
-    function ListCtrl($state, dbService) {
+    function CategoryCtrl($state, dbService) {
         var vm = this;
-        vm.companies = [
-            { "id": 001,
-              "name": "AirAsia" },
-            { "id": 002,
-                "name": "Indigo" },
-            { "id": 003,
-                "name": "dasds" },
-            { "id": 004,
-                "name": "JKL" },
-            { "id": 005,
-                "name": "MNO" },
-            { "id": 006,
-                "name": "PQR" }
-        ];        
+        vm.categories = "";
 
-        // dbService.list()
-        //     .then(function (companies) {
-        //         vm.companies = companies;
+        dbService.listCategories()
+            .then(function (categories) {
+                console.log(categories);
+                vm.categories = categories;
+            }).catch(function (err) {
+                console.info("Some Error Occured",err);
+            });
+        
+        vm.gotoBusiness = function (cId, cName) {
+            $state.go("business",{catId: cId, catName: cName});
+        };
+    }
+
+    CategoryCtrl.$inject = ["$state", "dbService"];
+    
+    function BusinessCtrl($stateParams,$state, dbService) {
+        var vm = this;
+        vm.companies = [];        
+        
+        vm.catId = $stateParams.catId;
+        vm.catName = $stateParams.catName;
+
+        vm.listBusiness = function () {
+            var xmlhttp = eval(dbService.res.business);
+            //console.log("data:"+  dbService.res.business);
+            var filteredResult = xmlhttp.filter(function(item) { return item.category_id == vm.catId});
+            console.log(typeof(filteredResult), filteredResult);
+            vm.filtBiz = filteredResult;
+        };
+        vm.listBusiness();
+
+        // dbService.listBusiness(vm.catId)
+        //     .then(function (result) {
+        //         vm.companies = result;
         //     }).catch(function (err) {
         //         console.info("Some Error Occured",err)
         //     });
@@ -33,27 +52,13 @@
             $state.go("dashboard", {'compId' : id, compName: name});
         }
     }
-    
-    ListCtrl.$inject = ["$state", "dbService"];
+
+    BusinessCtrl.$inject = ["$stateParams",  "$state", "dbService"];
 
     function DashboardCtrl($stateParams, $state, dbService) {
         var vm = this;
         vm.compId = $stateParams.compId;
         vm.compName = $stateParams.compName;
-        vm.usersList = [
-            {"id": 0001,
-            "name": "Bala",
-            "status": "online"},
-            {"id": 0002,
-                "name": "Prasanna",
-                "status": "Offline"},
-            {"id": 0003,
-                "name": "Sindhu",
-                "status": "online"},
-            {"id": 0004,
-                "name": "Rob",
-                "status": "Away"}
-        ];
     }
     DashboardCtrl.$inject = ['$stateParams', '$state', 'dbService'];
 

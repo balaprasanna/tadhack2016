@@ -4,10 +4,15 @@
 
     function AppConfig($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state("list", {
-                url: "/list",
-                templateUrl: "/views/list.html",
-                controller: "ListCtrl as ctrl"
+            .state("category", {
+                url: "/category",
+                templateUrl: "/views/category.html",
+                controller: "CategoryCtrl as ctrl"
+            })
+            .state("business", {
+                url: "/business/:catId/:catName",
+                templateUrl: "/views/business.html",
+                controller: "BusinessCtrl as ctrl"
             })
             .state("dashboard", {
                 url: "/dashboard/:compId/:compName",
@@ -24,7 +29,7 @@
                 }
             });
 
-        $urlRouterProvider.otherwise("/list");
+        $urlRouterProvider.otherwise("/category");
     }
     
     AppConfig.$inject = ["$stateProvider", "$urlRouterProvider"];

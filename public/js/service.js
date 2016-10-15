@@ -5,20 +5,27 @@
     function dbService($http, $q) {
         var vm = this;
         vm.skylink = new Skylink();
-        
-        vm.list = function () {
+        vm.res = "";
+        vm.filtBiz = "";
+        vm.listCategories = function () {
             var defer = $q.defer();
-            var params = {
-                
-            };
-            $http.get("/api/companies", {
-                params: params
-            }).then(function (result) {
-                defer.resolve(result.data);
-            }).catch(function (err) {
-                defer.reject(err);
-            });
+            $http.get("/api/list/categories")
+                .then(function (result) {
+                    console.log(result.data);
+                    vm.res = JSON.parse(result.data);
+                    defer.resolve(vm.res.category);
+                }).catch(function(err) {
+                    defer.reject(err);
+                });
             return defer.promise;
+        };
+
+        vm.listBusiness = function (cId) {
+            
+            var xmlhttp = eval(vm.res.business);
+            var filteredResult = xmlhttp.filter(function(item) { return item.category_id == cId});
+            console.log(typeof(filteredResult), filteredResult);
+            vm.filtBiz = filteredResult;
         };
         
         vm.getUserChat = function (compId,userId) {

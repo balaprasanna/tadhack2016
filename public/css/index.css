@@ -1,13 +1,13 @@
-.company {
+.category {
     padding-bottom: 20px;
 }
 
-.list .company img {
-    width: 240px;
-    height: 300px;
+.list .category img {
+    width: 90px;
+    height: 90px;
 }
 
-.list .company button {
+.list .category button {
     width: 100%;
     padding: 10px 0;
 }

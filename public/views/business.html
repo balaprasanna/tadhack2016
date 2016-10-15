@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="jumbotron">
+            <div class="input-group">
+                <span class="input-group-addon">Company Name: </span>
+                <input type="text" name="compName" class="form-control" ng-model="ctrl.bizName">
+            </div>
+    </div>
+
+    <!--<div class="list" ng-show="ctrl.companies">-->
+        <div class="category col-lg-3 col-md-4 col-sm-6" ng-repeat="b in ctrl.filtBiz | filter:ctrl.bizName">
+
+            <img ng-show="b.business_logo" src="http://www.chabu.in/data/icon/bus_{{b.category_id}}_{{b.business_id}}.png"
+                 alt="no-default-thumbnail.png" class="img-thumbnail">
+            <img ng-hide="b.business_logo" src="../images/thumbnails/no-default-thumbnail.png"
+                 alt="no-default-thumbnail.png" class="img-thumbnail">
+            <h4>{{b.business_name}}</h4>
+            <button type="button" class="btn btn-default" ng-click="ctrl.gotoDashboard(company.id,company.name)">Select</button>
+        </div>
+    <!--</div>-->
+    <!--<div class="list" ng-hide="ctrl.companies">-->
+        <!--<h1>Company(s) that you are searching for cannot be found. Please try again with a different search term.</h1>-->
+    <!--</div>-->
+</div>

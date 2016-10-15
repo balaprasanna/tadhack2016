@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="jumbotron">
+        <div class="input-group">
+            <span class="input-group-addon">Category: </span>
+            <input type="text" name="compName" class="form-control" ng-model="ctrl.searchcat">
+        </div>
+    </div>
+    <!--<div class="list" ng-show="ctrl.categories">-->
+        <div class="category col-lg-3 col-md-4 col-sm-6" ng-repeat="c in ctrl.categories | filter:ctrl.searchcat">
+            <img src="http://www.chabu.in/data/icon/cat_{{c.category_id}}.png" alt="no-default-thumbnail.png" class="img-thumbnail">
+            <h4>{{c.category_name}}</h4>
+            <button type="button" class="btn btn-default" ng-click="ctrl.gotoBusiness(c.category_id,c.category_name)">Select</button>
+        </div>
+    <!--</div>-->
+    <!--<div class="list" ng-hide="ctrl.categories">-->
+        <!--<h1>Company(s) that you are searching for cannot be found. Please try again with a different search term.</h1>-->
+    <!--</div>-->
+</div>
