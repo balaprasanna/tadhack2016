@@ -6,7 +6,20 @@
                 <li><a ui-sref="dashboard.userChat({compId:ctrl.compId,userId: u.id})">{{u.name}}</a></li>
             </ul>
         </div>
-        <div class="col-sm-9" ui-view="userChat"></div>
+        <div id="vid-box">
+            <video id="myvideo" style="transform: rotateY(-180deg);" autoplay muted></video>
+        </div>
+        <header>
+            <input id="name" type="text" autofocus="" placeholder="My name" />
+            <button ng-click="ctrl.setname()">Set my name</button>
+
+            <input id="message" type="text" placeholder="My message" />
+            <button ng-click="ctrl.sendmessage()">Send message</button>
+        </header>
+        <div id="container">
+            <div id="chatbox"></div>
+        </div>
+        <!--<div class="col-sm-9" ui-view="userChat"></div>-->
     </div>
 
 </div>

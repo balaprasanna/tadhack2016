@@ -29,7 +29,7 @@
         //     });
 
         vm.gotoDashboard = function (id, name) {                        
-            dbService.initSkylink(id+name);            
+            //dbService.initSkylink(id+name);            
             $state.go("dashboard", {'compId' : id, compName: name});
         }
     }
@@ -40,6 +40,7 @@
         var vm = this;
         vm.compId = $stateParams.compId;
         vm.compName = $stateParams.compName;
+        dbService.initSkylink($stateParams.compId + $stateParams.compName);
         vm.usersList = [
             {"id": 0001,
             "name": "Bala",
@@ -54,6 +55,13 @@
                 "name": "Rob",
                 "status": "Away"}
         ];
+
+        vm.setname = function(){
+            dbService.setname();
+        }
+        vm.sendmessage = function(){
+            dbService.sendmessage();
+        }
     }
     DashboardCtrl.$inject = ['$stateParams', '$state', 'dbService'];
 
