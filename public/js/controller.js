@@ -8,18 +8,18 @@
         var vm = this;
         vm.companies = [
             { "id": 001,
-              "name": "ABC" },
+              "name": "AirAsia" },
             { "id": 002,
-                "name": "DEF" },
+                "name": "Indigo" },
             { "id": 003,
-                "name": "GHI" },
+                "name": "dasds" },
             { "id": 004,
                 "name": "JKL" },
             { "id": 005,
                 "name": "MNO" },
             { "id": 006,
                 "name": "PQR" }
-        ];
+        ];        
 
         // dbService.list()
         //     .then(function (companies) {
@@ -28,7 +28,8 @@
         //         console.info("Some Error Occured",err)
         //     });
 
-        vm.gotoDashboard = function (id, name) {
+        vm.gotoDashboard = function (id, name) {                        
+            dbService.initSkylink(id+name);            
             $state.go("dashboard", {'compId' : id, compName: name});
         }
     }
@@ -59,7 +60,10 @@
     function UserChatCtrl($stateParams, dbService) {
         var vm = this;
         vm.user = {};
-
+        
+        vm.start = function(event){
+            //dbService.start(event);
+        }
         dbService.getUserChat($stateParams.compId,$stateParams.userId)
             .then(function (user) {
                 vm.user = user;

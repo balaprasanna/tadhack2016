@@ -19,7 +19,7 @@
                 views:{
                     'userChat':{
                         templateUrl: "/views/userChat.html",
-                        controller: "UserChatCtrl as ctrl"
+                        controller: "UserChatCtrl as childctrl"
                     }
                 }
             });
