@@ -14,7 +14,7 @@
             <img ng-hide="b.business_logo" src="../images/thumbnails/no-default-thumbnail.png"
                  alt="no-default-thumbnail.png" class="img-thumbnail">
             <h4>{{b.business_name}}</h4>
-            <button type="button" class="btn btn-default" ng-click="ctrl.gotoDashboard(company.id,company.name)">Select</button>
+            <button type="button" class="btn btn-default" ng-click="ctrl.gotoDashboard(b.business_id,b.business_name)">Select</button>
         </div>
     <!--</div>-->
     <!--<div class="list" ng-hide="ctrl.companies">-->

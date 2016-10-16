@@ -46,24 +46,19 @@
 
         vm.initSkylink =  function (roomName){
             vm.skylink.init({
-            apiKey: '4ec21635-cbbc-4a78-84c8-837450b63f66',
-            defaultRoom: roomName
-            }, function() {
+            apiKey: '0141ed72-59e2-42c6-a246-0f960560ca40',
+            defaultRoom: roomName || "lobby"
+            },function(err) {
+                if(err){console.log(err); }
                 console.log('joining in room' + roomName);
             vm.skylink.joinRoom({
                 audio: true,
                 video: true
-            }, function (jRError, jRSuccess) {
-              if(jRError){
-                  return;
-              }
-              vm.skylink.getPeers(function (error, success) {
-                if (error) return;
-                console.log("The list of only un-privileged Peers in the same App space ->", success);
-              });  
-            
-            });
+            }, function (err) {
+                if(err) {   console.log(err); }
                 console.log('joined in room'+ roomName);
+            });
+                
             });
         }
 

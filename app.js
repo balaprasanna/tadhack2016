@@ -48,7 +48,7 @@ app.get("/api/list/business/:catId", function (req, res) {
 app.use(express.static(__dirname + "/public"));
 app.use("/bower_components", express.static(__dirname + "/bower_components"));
 
-app.set("port", process.argv[2] || process.env.APP_PORT || 3001);
+app.set("port", process.argv[2] || process.env.APP_PORT || 8080);
 
 app.listen(app.get("port"), function(){
     console.info("Application started on port %d", app.get("port"));
